@@ -46,7 +46,7 @@ int main(){
         calculate_minimax((char (*)[3])list_of_boards[i], player);
 		end = clock();
 
-		fprintf(timings_file, "minimax\t\t%d\t%ld\n", i, (end-start));
+		fprintf(timings_file, "minimax\t\t%d\t%ld\n", i+1, (end-start));
     }
 
 	// alpha beta pruning runs
@@ -59,7 +59,7 @@ int main(){
 		calculate_ab_pruning((char (*)[3])list_of_boards2[i], player);
 		end = clock();
 
-		fprintf(timings_file, "ab_pruning\t%d\t%ld\n", i, (end-start));
+		fprintf(timings_file, "ab_pruning\t%d\t%ld\n", i+1, (end-start));
     }
 
 	fclose(timings_file);
