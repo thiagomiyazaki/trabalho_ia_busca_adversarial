@@ -1,0 +1,26 @@
+capa
+	instituição
+	autores
+	título do relatório
+	cidade e ano
+resumo
+	compilação de todas as partes do trabalho (geralmente escrita ao final do trabalho)
+		* deve ser curto - tem um limite de palavras
+		* não deve conter referências bibliográficas
+		* deve ser seguido de palavras chave
+introdução
+	contextualizar o leitor
+	problematizar a temática do relatório
+	abordar os principais conceitos
+	objetivo do trabalho
+material e métodos
+	descrever o que foi feito
+	com o que foi feito
+	quando e onde foi feito
+	(o objetivo é permitir que outras pessoas sejam capazes de replicar seu experimento)
+resultados
+	apresentar e descrever os dados que foram coletados/observados
+discussão
+	buscar motivos que justificam os resultados obtidos
+	comparar com resultados de estudos anteriores
+referências bibliográficas

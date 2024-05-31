@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "limits.h": "c",
+        "alpha_beta_pruning.h": "c"
+    }
+}
