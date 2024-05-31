@@ -5,4 +5,4 @@
 - Acesse o terminal, vá para a pasta onde foi extraído o conteúdo e para compilar digite `make`
 - Para rodar `./main`
 - O arquivo `timings.txt` mostra os resultados cronometrados.
-- Em caso de alterações, se `make` não estiver compilando, digite o arquivo main (`rm main`)
+- Em caso de alterações, se `make` não estiver compilando, delete o arquivo main (`rm main`) e execute `make` novamente.
