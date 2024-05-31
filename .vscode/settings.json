@@ -1,6 +1,9 @@
 {
     "files.associations": {
         "limits.h": "c",
-        "alpha_beta_pruning.h": "c"
+        "alpha_beta_pruning.h": "c",
+        "stdlib.h": "c",
+        "execution.h": "c",
+        "board.h": "c"
     }
 }

@@ -68,7 +68,9 @@ int alpha_beta_search(char board[3][3], char current_player){
 */
 int max_value(char board[3][3], int alpha, int beta){
     // condicao de parada
-    if (!isMovesLeft(board)) return utility(board);
+    int score = utility(board);
+    if (score != 0) return score;
+    if (!isMovesLeft(board) && score == 0) return 0; 
 
     int best_value = INT_MIN;
 
@@ -78,7 +80,10 @@ int max_value(char board[3][3], int alpha, int beta){
                 board[i][j] = MAX_PLAYER;                                       // tentamos fazer a jogada
                 best_value = max(best_value, min_value(board, alpha, beta));    // com a jogada feita calculamos minimax
                 /* ler obs 1 */
-                if (best_value >= beta) return best_value;
+                if (best_value >= beta) {
+                    board[i][j] = EMPTY;
+                    return best_value;
+                    }
                 alpha = max(alpha, best_value);                 // alpha deve refletir o maior valor de utilidade encontrado
                 board[i][j] = EMPTY;                // voltamos o board ao estado original para prosseguirmos com a busca
             }
@@ -93,18 +98,65 @@ int max_value(char board[3][3], int alpha, int beta){
     - analogo ao max_value
 */
 int min_value(char board[3][3], int alpha, int beta){
-    if (!isMovesLeft(board)) return utility(board);
+    // condicao de parada
+    int score = utility(board);
+    if (score != 0) return score;
+    if (!isMovesLeft(board) && score == 0) return 0; 
+
     int best_value = INT_MAX;
-        for (int i = 0; i < 3; i++){
+    
+    for (int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
             if(board[i][j] == EMPTY){
                 board[i][j] = MIN_PLAYER;
                 best_value = min(best_value, max_value(board, alpha, beta));
-                if (best_value <= alpha) return best_value;
+                if (best_value <= alpha) {
+                    board[i][j] = EMPTY;
+                    return best_value;
+                }
                 beta = min(beta, best_value);
                 board[i][j] = EMPTY;
             }
         }
     }
     return best_value;
+}
+
+move find_best_move_alphabeta(char board[3][3], char symbol){ 
+	int bestVal;
+	if(symbol == MAX_PLAYER) bestVal = INT_MIN;
+	else bestVal = INT_MAX;
+
+	move bestMove; 
+	bestMove.row = -1; 
+	bestMove.col = -1; 
+
+	//Checa todas as ações possíveis 
+	for (int i = 0; i<3; i++)
+		for (int j = 0; j<3; j++)
+			// Check if cell is empty 
+			if (board[i][j]=='_'){ 
+				//Executa movimento
+				board[i][j] = symbol; 
+
+				int moveVal;
+
+				if(symbol == MAX_PLAYER) moveVal = alpha_beta_search(board, MIN_PLAYER);
+				else moveVal = alpha_beta_search(board, MAX_PLAYER);
+
+				//Desfaz movimento
+				board[i][j] = '_'; 
+
+				//Atualiza melhor movimento, se necessário 
+				if ((moveVal > bestVal && symbol == MAX_PLAYER) || (moveVal < bestVal && symbol == MIN_PLAYER)) 
+				{ 
+					bestMove.row = i; 
+					bestMove.col = j; 
+					bestVal = moveVal; 
+				} 
+			} 
+
+	printf("(Alpha-Beta Pruning) Valor do melhor movimento : %d | Jogador: %c | Move: %d %d\n\n", bestVal, symbol, bestMove.row, bestMove.col); 
+
+	return bestMove; 
 }

@@ -24,13 +24,10 @@ int min(int a, int b){
 */
 int minimax(char board[3][3], int depth, bool isMax){
     //Checa se alguém venceu o jogo
-	int score = utility(board); 
-	if (score == 10)
-		return score; 
-	if (score == -10) 
-		return score;
+	int score = utility(board);
+	if (score != 0) return score;
     //Ou se empatou 
-	if (isMovesLeft(board)==false) 
+	if (!isMovesLeft(board) && score == 0) 
 		return 0; 
 
 	// Movimento do jogador MAX (x) 
@@ -84,7 +81,7 @@ int minimax(char board[3][3], int depth, bool isMax){
 move findBestMove(char board[3][3], char symbol) 
 { 
 	int bestVal;
-	if(symbol == 'x') bestVal = -1000;
+	if(symbol == MAX_PLAYER) bestVal = -1000;
 	else bestVal = 1000;
 
 	move bestMove; 
@@ -101,14 +98,14 @@ move findBestMove(char board[3][3], char symbol)
 
 				int moveVal;
 
-				if(symbol == 'x') moveVal = minimax(board, 0, false);
+				if(symbol == MAX_PLAYER) moveVal = minimax(board, 0, false);
 				else moveVal = minimax(board, 0, true);
 
 				//Desfaz movimento
 				board[i][j] = '_'; 
 
 				//Atualiza melhor movimento, se necessário 
-				if ((moveVal > bestVal && symbol == 'x') || (moveVal < bestVal && symbol == 'o')) 
+				if ((moveVal > bestVal && symbol == MAX_PLAYER) || (moveVal < bestVal && symbol == MIN_PLAYER)) 
 				{ 
 					bestMove.row = i; 
 					bestMove.col = j; 
@@ -116,7 +113,7 @@ move findBestMove(char board[3][3], char symbol)
 				} 
 			} 
 
-	printf("Valor do melhor movimento : %d | Jogardor: %c\n\n", bestVal, symbol); 
+	printf("(Minimax) Valor do melhor movimento : %d | Jogador: %c | Move: %d %d\n\n", bestVal, symbol, bestMove.row, bestMove.col); 
 
 	return bestMove; 
-} 
+}

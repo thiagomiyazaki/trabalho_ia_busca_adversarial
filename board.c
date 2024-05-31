@@ -15,19 +15,28 @@ bool isMovesLeft(char b[3][3]){
 	return false; 
 } 
 
+int count_empty_spaces(char b[3][3]){
+	int count = 0;
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+			if (b[i][j] == EMPTY) count++;
+	return count;
+}
+
 /*
 	Função utilidade para um tabuleiro de jogo da velha
 */
 int utility(char b[3][3])
-{ 
+{
+	int empty_spaces_count = count_empty_spaces(b);
 	// Checa linhas
 	for (int row = 0; row<3; row++) 
 	{ 
 		if (b[row][0]==b[row][1] && b[row][1]==b[row][2]){ 
 			if (b[row][0]=='x')
-				return +10;
+				return +100 + empty_spaces_count;
             if (b[row][0]=='o') 
-				return -10;
+				return -100 - empty_spaces_count;
 		} 
 	} 
 
@@ -36,9 +45,9 @@ int utility(char b[3][3])
 	{ 
 		if (b[0][col]==b[1][col] && b[1][col]==b[2][col]){ 
 			if (b[0][col]=='x') 
-				return +10;
+				return +100 + empty_spaces_count;
             if (b[0][col]=='o') 
-			    return -10;
+			    return -100 - empty_spaces_count;
 
 		} 
 	} 
@@ -46,16 +55,16 @@ int utility(char b[3][3])
 	//Checa diagonais
 	if (b[0][0]==b[1][1] && b[1][1]==b[2][2]){ 
 		if (b[0][0]=='x')
-			return +10; 
+			return +100 + empty_spaces_count; 
 		else if (b[0][0]=='o')
-			return -10;
+			return -100 - empty_spaces_count;
 	} 
 
 	if (b[0][2]==b[1][1] && b[1][1]==b[2][0]){ 
 		if (b[0][2]=='x') 
-			return +10; 
+			return +100 + empty_spaces_count; 
 		else if (b[0][2]=='o') 
-			return -10; 
+			return -100 - empty_spaces_count; 
 	} 
 
 	// Else if none of them have won then return 0 

@@ -1,0 +1,9 @@
+algo		marks	time
+minimax		0	5943
+minimax		1	202
+minimax		2	60
+minimax		3	10
+ab_pruning	0	258
+ab_pruning	1	94
+ab_pruning	2	49
+ab_pruning	3	7
