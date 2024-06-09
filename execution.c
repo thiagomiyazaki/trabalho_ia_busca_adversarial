@@ -2,6 +2,7 @@
 #include "board.h"
 #include "execution.h"
 #include "alpha_beta_pruning.h"
+#include <stdbool.h>
 
 void calculate_minimax(char board[3][3], char first_player){
     // Apenas printa o tabuleiro
@@ -14,11 +15,11 @@ void calculate_minimax(char board[3][3], char first_player){
     while(utility(board)==0 && isMovesLeft(board)){
         if (k%2==0){
             move bestMove = findBestMove(board, 'o');
-            play(board,bestMove,'o');
+            play(board, bestMove,'o');
         }
         else{
             move bestMove = findBestMove(board, 'x');
-            play(board,bestMove,'x');
+            play(board, bestMove,'x');
         }
         printBoard(board);
         k++;
@@ -36,11 +37,33 @@ void calculate_ab_pruning(char board[3][3], char first_player){
     while(utility(board)==0 && isMovesLeft(board)){
         if (k%2==0){
             move bestMove = find_best_move_alphabeta(board, MIN_PLAYER);
-            play(board,bestMove, MIN_PLAYER);
+            play(board, bestMove, MIN_PLAYER);
         }
         else{
             move bestMove = find_best_move_alphabeta(board, MAX_PLAYER);
-            play(board,bestMove, MAX_PLAYER);
+            play(board, bestMove, MAX_PLAYER);
+        }
+        printBoard(board);
+        k++;
+    }
+}
+
+void calculate_mixed(char board[3][3], char first_player, bool is_max_alpha){
+    // Apenas printa o tabuleiro
+    printBoard(board);
+
+    // determina quem será o primeiro a jogar
+    int k = (first_player == MIN_PLAYER) ? 0 : 1;
+    
+    // enquanto: utilidade == 0 e ainda houver espaços vazios
+    while(utility(board)==0 && isMovesLeft(board)){
+        if (k%2==0){
+            move bestMove = is_max_alpha ? findBestMove(board, MIN_PLAYER) : find_best_move_alphabeta(board, MIN_PLAYER);
+            play(board, bestMove, MIN_PLAYER);
+        }
+        else{
+            move bestMove = !is_max_alpha ? findBestMove(board, MAX_PLAYER) : find_best_move_alphabeta(board, MAX_PLAYER);
+            play(board, bestMove, MAX_PLAYER);
         }
         printBoard(board);
         k++;

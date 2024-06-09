@@ -18,4 +18,5 @@ bool isMovesLeft(char board[3][3]);
 int utility(char b[3][3]);
 void play(char b[3][3], move m, char p);
 void printBoard(char b[3][3]);
+void calculate_mixed(char board[3][3], char first_player, bool is_max_alpha);
 #endif
