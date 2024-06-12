@@ -68,7 +68,7 @@ int main(int argc, char const *argv[]) {
 		{
 			valid_pos = false;
 
-			if (algorithm_type == 2)
+			if (algorithm_type == 2 || algorithm_type == 0)
 				player = (i % 2 == 0) ? MIN_PLAYER : MAX_PLAYER;
 			else
 				player = (i % 2 == 0) ? MAX_PLAYER : MIN_PLAYER;
@@ -98,7 +98,7 @@ int main(int argc, char const *argv[]) {
 
 	clock_t start, end;
 
-	if (algorithm_type == 2)
+	if (algorithm_type == 2 || algorithm_type == 0)
 		player = (i % 2 == 0) ? MIN_PLAYER : MAX_PLAYER;
 	else
 		player = (i % 2 == 0) ? MAX_PLAYER : MIN_PLAYER;

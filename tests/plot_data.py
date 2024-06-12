@@ -18,7 +18,7 @@ def plotar_grafico(pastas, medias, desvios_padrao):
     plt.bar(pastas, medias, yerr=desvios_padrao, capsize=5)
     plt.xlabel('Arquivo')
     plt.ylabel('Média')
-    plt.title('Média e Desvio Padrão por Pasta')
+    plt.title('Média e Desvio Padrão por Arquivo')
     plt.xticks(rotation=90)
     plt.tight_layout()
     plt.savefig('data.pdf')

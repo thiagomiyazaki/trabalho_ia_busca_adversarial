@@ -37,7 +37,7 @@ for arg1 in "${arg1_list[@]}"; do
         echo "Executando $algoritmo com $arg2 espacos pre ocupados"
         
         # Nome do arquivo de saída baseado na combinação de argumentos
-        output_file="${output_dir}/output_${algoritmo}_${arg2}.txt"
+        output_file="${output_dir}/${algoritmo}_${arg2}.txt"
         
         # Limpa o arquivo de saída se existir
         > $output_file
