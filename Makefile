@@ -1,20 +1,35 @@
-# Define the compiler
+# Diretório de origem dos arquivos .c
+SRC_DIR = .
+
+# Nome do executável final
+TARGET = main.out
+TEST_TARGET = $(SRC_DIR)/tests/run_tests.out
+
+# Todos os arquivos .c exceto o que queremos ignorar
+SRC_FILES = $(SRC_DIR)/*.c
+TEST_SRC_FILES = $(filter-out $(SRC_DIR)/main.c, $(wildcard $(SRC_DIR)/*.c)) $(SRC_DIR)/tests/*.c
+
+
+# Compilador e flags
 CC = gcc
+CFLAGS = -Wall -Wextra -std=c11
 
-# Define any compile-time flags
-CFLAGS = -Wall -Wextra -O2
-
-# Define the name of the executable output
-TARGET = main 
-
-# Default target
+# Regras de compilação
 all: $(TARGET)
 
-# Rule to build the executable
-$(TARGET): main.c
-	$(CC) $(CFLAGS) -o $(TARGET) main.c alpha_beta_pruning.c alpha_beta_pruning.h board.c board.h execution.c execution.h minimax.c minimax.h
+test: $(TEST_TARGET)
 
-# Clean up
+$(TARGET):
+	$(CC) -DVERBOSE $(SRC_FILES) $(CFLAGS) -o $@ $^
+
+$(TEST_TARGET): 
+	$(CC) $(TEST_SRC_FILES) $(CFLAGS) -o $@ $^
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	rm -f $(TARGET)
+	rm -f $(TARGET) $(TEST_TARGET)
+
+.PHONY: all test clean
 
