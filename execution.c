@@ -5,8 +5,11 @@
 #include <stdbool.h>
 
 void calculate_minimax(char board[3][3], char first_player){
+
     // Apenas printa o tabuleiro
-    printBoard(board);
+    #ifdef VERBOSE
+        printBoard(board);
+    #endif
 
     // determina quem será o primeiro a jogar
     int k = (first_player == MIN_PLAYER) ? 0 : 1;
@@ -21,14 +24,19 @@ void calculate_minimax(char board[3][3], char first_player){
             move bestMove = findBestMove(board, 'x');
             play(board, bestMove,'x');
         }
-        printBoard(board);
+        #ifdef VERBOSE
+            printBoard(board);
+        #endif
         k++;
     }
 }
 
 void calculate_ab_pruning(char board[3][3], char first_player){
+
     // Apenas printa o tabuleiro
-    printBoard(board);
+    #ifdef VERBOSE
+        printBoard(board);
+    #endif
 
     // determina quem será o primeiro a jogar
     int k = (first_player == MIN_PLAYER) ? 0 : 1;
@@ -43,14 +51,19 @@ void calculate_ab_pruning(char board[3][3], char first_player){
             move bestMove = find_best_move_alphabeta(board, MAX_PLAYER);
             play(board, bestMove, MAX_PLAYER);
         }
-        printBoard(board);
+        #ifdef VERBOSE
+            printBoard(board);
+        #endif
         k++;
     }
 }
 
 void calculate_mixed(char board[3][3], char first_player, bool is_max_alpha){
+
     // Apenas printa o tabuleiro
-    printBoard(board);
+    #ifdef VERBOSE
+        printBoard(board);
+    #endif
 
     // determina quem será o primeiro a jogar
     int k = (first_player == MIN_PLAYER) ? 0 : 1;
@@ -65,7 +78,9 @@ void calculate_mixed(char board[3][3], char first_player, bool is_max_alpha){
             move bestMove = !is_max_alpha ? findBestMove(board, MAX_PLAYER) : find_best_move_alphabeta(board, MAX_PLAYER);
             play(board, bestMove, MAX_PLAYER);
         }
-        printBoard(board);
+        #ifdef VERBOSE
+            printBoard(board);
+        #endif
         k++;
     }
 }

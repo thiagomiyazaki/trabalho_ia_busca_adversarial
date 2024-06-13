@@ -113,7 +113,9 @@ move findBestMove(char board[3][3], char symbol)
 				} 
 			} 
 
-	printf("(Minimax) Valor do melhor movimento : %d | Jogador: %c | Move: %d %d\n\n", bestVal, symbol, bestMove.row, bestMove.col); 
+	#ifdef VERBOSE
+		printf("(Minimax) Valor do melhor movimento : %d | Jogador: %c | Move: %d %d\n\n", bestVal, symbol, bestMove.row, bestMove.col); 
+	#endif
 
 	return bestMove; 
 }

@@ -156,7 +156,9 @@ move find_best_move_alphabeta(char board[3][3], char symbol){
 				} 
 			} 
 
-	printf("(Alpha-Beta Pruning) Valor do melhor movimento : %d | Jogador: %c | Move: %d %d\n\n", bestVal, symbol, bestMove.row, bestMove.col); 
+    #ifdef VERBOSE
+	    printf("(Alpha-Beta Pruning) Valor do melhor movimento : %d | Jogador: %c | Move: %d %d\n\n", bestVal, symbol, bestMove.row, bestMove.col); 
+    #endif
 
 	return bestMove; 
 }
