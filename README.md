@@ -6,3 +6,4 @@
 - Para executar o programa: `./main`
 - O arquivo `timings.txt` mostra os resultados cronometrados.
 - Em caso de alterações, se `make` não estiver compilando, delete o arquivo main (`rm main`) e execute `make` novamente.
+- Para compilar o arquivo que roda os testes é preciso rodar `make test`
