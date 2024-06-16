@@ -23,6 +23,12 @@ def plotar_grafico(pastas, medias, desvios_padrao):
     plt.tight_layout()
     plt.savefig('data.pdf')
 
+def output_parameters(pastas, medias, desvios_padrao):
+    with open('stats_values.txt', 'w') as file:
+        for i in range(len(pastas)):
+            file.write(f'{pastas[i]} : {medias[i]} : {desvios_padrao[i]}\n')
+
+
 def main(pasta):
 
     pastas = []
@@ -37,6 +43,7 @@ def main(pasta):
         desvios_padrao.append(desvio_padrao)
 
     plotar_grafico(pastas, medias, desvios_padrao)
+    output_parameters(pastas, medias, desvios_padrao)
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
