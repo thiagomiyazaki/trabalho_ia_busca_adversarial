@@ -90,7 +90,6 @@ int main(){
 		fprintf(timings_file, "mix_ab_min\t%d\t\t%ld\n", i+1, (end-start));
     }
 
-
 	fclose(timings_file);
 	free_list_of_boards(list_of_boards2);
 	free_list_of_boards(list_of_boards3);
